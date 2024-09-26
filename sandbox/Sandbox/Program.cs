@@ -6,9 +6,26 @@ class Program
     {
         Console.WriteLine("Hello Sandbox World!");
 
-        for (int i = 1; i <=10; i = i+1)
+        List<int> numberList;
+        numberList = new();
+
+        int input = -9999999;
+
+        while (input != 0)
         {
-            Console.WriteLine(i);
+
+            Console.Write("Enter a number: ");
+            string inputString = Console.ReadLine();
+            input = int.Parse(inputString);
+            numberList.Add(input);
         }
+
+        foreach (int item in numberList)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine(numberList);
+
     }
 }
