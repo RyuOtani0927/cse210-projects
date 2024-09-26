@@ -49,6 +49,7 @@ class Program
         Console.WriteLine($"The average is: {average}");
         Console.WriteLine($"The largest number is: {max}");
         Console.WriteLine($"The smallest positive number is: {positiveMin}");
+        Console.WriteLine("The sorted list is:");
 
         inputs.Sort();
 
@@ -56,6 +57,8 @@ class Program
         {
             Console.WriteLine(each);
         }
+
+        Console.WriteLine();
 
     }
 }
