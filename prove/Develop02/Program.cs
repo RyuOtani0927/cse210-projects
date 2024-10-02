@@ -4,6 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop02 World!");
+
+        Journal today = new();
+
+        string newEntry = today.Entry();
+
+        Console.WriteLine(newEntry);
+
     }
 }

@@ -4,28 +4,44 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Sandbox World!");
+        Costume nurse = new Costume();
+        nurse.headWear = "face mask";
+        nurse.gloves = "nitrile gloves";
+        nurse.shoes = "orthopedic sneakers";
+        nurse.upperGarmet = "scrubs";
+        nurse.lowerGarment = "scrubs";
+        nurse.accessory = "stethoscope";
 
-        List<int> numberList;
-        numberList = new();
+        Costume detective = new Costume();
+        detective.headWear = "ffedora";
+        detective.gloves = "leather";
+        detective.shoes = "loafers";
+        detective.upperGarmet = "trenchcoat";
+        detective.lowerGarment = "slacks";
+        detective.accessory = "magnifying glass";
 
-        int input = -9999999;
+        Costume rancher = new Costume();
+        rancher.headWear = "cowboy hat";
+        rancher.gloves = "work";
+        rancher.shoes = "boots";
+        rancher.upperGarmet = "fancy vest";
+        rancher.lowerGarment = "jeans";
+        rancher.accessory = "lasso";
 
-        while (input != 0)
-        {
+        Console.WriteLine("Nurse Costume: ");
+        nurse.ShowWardrobe();
 
-            Console.Write("Enter a number: ");
-            string inputString = Console.ReadLine();
-            input = int.Parse(inputString);
-            numberList.Add(input);
-        }
+        Console.WriteLine();
 
-        foreach (int item in numberList)
-        {
-            Console.WriteLine(item);
-        }
+        Console.WriteLine("Detective Costume: ");
+        detective.ShowWardrobe();
 
-        Console.WriteLine(numberList);
+        Console.WriteLine();
 
+        Console.WriteLine("Rancher Costume: ");
+        rancher.ShowWardrobe();
+
+        Console.WriteLine();
     }
+
 }
