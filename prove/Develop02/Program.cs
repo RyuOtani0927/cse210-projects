@@ -5,11 +5,9 @@ class Program
     static void Main(string[] args)
     {
 
-        Journal today = new();
+        Journal newJournal = new();
 
-        string newEntry = today.Entry();
-
-        Console.WriteLine(newEntry);
+        newJournal.Menu();
 
     }
 }

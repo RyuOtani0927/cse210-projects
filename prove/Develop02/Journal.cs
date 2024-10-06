@@ -1,36 +1,77 @@
 
 public class Journal
 {
-    public string prompt;
 
-    public string response;
+    public List<Entry> entries = new();
 
-    public string date;
-
-    public string Entry()
+    public void Write()
     {
+        Console.WriteLine("Write");
+    }
 
-        List<string> prompts = new();
-        prompts.Add("Who was the most interesting person I interacted with today?");
-        prompts.Add("What was the best part of my day?");
-        prompts.Add("How did I see the hand of the Lord in my life today?");
-        prompts.Add("What was the strongest emotion I felt today?");
-        prompts.Add("If I had one thing I could do over today, what would it be?");
+    public void Display()
+    {
+        Console.WriteLine("Display");
+    }
 
-        Random rnd = new Random();
-        int promptIndex = rnd.Next(prompts.Count);
+    public void Save()
+    {
+        Console.WriteLine("Save");
+    }
 
-        prompt = prompts[promptIndex];
+    public void Load()
+    {
+        Console.WriteLine("Load");
+    }
 
-        Console.WriteLine(prompt);
-        Console.Write("> ");
-        response = Console.ReadLine();
+    public void Menu()
+    {
+        int choice = 0;
 
-        DateTime theCurrentTime = DateTime.Now;
-        date = theCurrentTime.ToShortDateString();
+        while (choice != 5)
+        {
+            choice = 0;
 
-        string newEntry = $"Date: {date} - Prompt: {prompt}\n{response}";
+            Console.WriteLine();
+            Console.WriteLine("Please select one of the following choices:");
+            Console.WriteLine("1. Write");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Load");
+            Console.WriteLine("4. Save");
+            Console.WriteLine("5. Quit");
 
-        return newEntry;
+            while (choice < 1 || choice > 5)
+            {
+                Console.Write("What would you like to do? (1-5): ");
+                choice = int.Parse(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    Write();
+                }
+                else if (choice == 2)
+                {
+                    Display();
+                }
+                else if (choice == 3)
+                {
+                    Save();
+                }
+                else if (choice == 4)
+                {
+                    Load();
+                }
+                else if (choice == 5)
+                {
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("Please type again.");
+                    Console.WriteLine();
+                }
+
+            }
+        }
     }
 }
