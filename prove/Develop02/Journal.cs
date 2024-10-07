@@ -6,12 +6,41 @@ public class Journal
 
     public void Write()
     {
-        Console.WriteLine("Write");
+        Entry entry = new();
+
+        List<string> prompts = new();
+        prompts.Add("Who was the most interesting person I interacted with today?");
+        prompts.Add("What was the best part of my day?");
+        prompts.Add("How did I see the hand of the Lord in my life today?");
+        prompts.Add("What was the strongest emotion I felt today?");
+        prompts.Add("If I had one thing I could do over today, what would it be?");
+
+        Random rnd = new Random();
+        int promptIndex = rnd.Next(prompts.Count);
+
+        Console.WriteLine();
+
+        entry.prompt = prompts[promptIndex];
+
+        Console.WriteLine(entry.prompt);
+        Console.Write("> ");
+        entry.response = Console.ReadLine();
+
+        DateTime theCurrentTime = DateTime.Now;
+        entry.date = theCurrentTime.ToShortDateString();
+
+        entries.Add(entry);
+
     }
 
     public void Display()
     {
-        Console.WriteLine("Display");
+        foreach (Entry entry in entries)
+        {
+            Console.WriteLine();
+            string arrangedEntry = entry.Arrange();
+            Console.WriteLine(arrangedEntry);
+        }
     }
 
     public void Save()
