@@ -1,4 +1,6 @@
 
+using System.IO; 
+
 public class Journal
 {
 
@@ -38,19 +40,48 @@ public class Journal
         foreach (Entry entry in entries)
         {
             Console.WriteLine();
-            string arrangedEntry = entry.Arrange();
-            Console.WriteLine(arrangedEntry);
+            string arranged = entry.Arrange();
+            Console.WriteLine(arranged);
         }
     }
 
     public void Save()
     {
-        Console.WriteLine("Save");
+
+        Console.Write("What is the file name? ");
+        string fileName = Console.ReadLine();
+
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+
+            foreach (Entry entry in entries)
+            {
+                // You can add text to the file with the WriteLine method
+                outputFile.WriteLine($"{entry.prompt}|{entry.response}|{entry.date}");
+            }
+
+        }
     }
 
     public void Load()
     {
-        Console.WriteLine("Load");
+
+        Console.Write("What is the file name? ");
+        string fileName = Console.ReadLine();
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+
+        foreach (string line in lines)
+        {
+            Entry entry = new();
+
+            string[] entryInfo = line.Split("|");
+
+            entry.prompt = entryInfo[0];
+            entry.response = entryInfo[1];
+            entry.date = entryInfo[2];
+
+            entries.Add(entry);
+        }
     }
 
     public void Menu()
@@ -84,11 +115,11 @@ public class Journal
                 }
                 else if (choice == 3)
                 {
-                    Save();
+                    Load();
                 }
                 else if (choice == 4)
                 {
-                    Load();
+                    Save();
                 }
                 else if (choice == 5)
                 {
