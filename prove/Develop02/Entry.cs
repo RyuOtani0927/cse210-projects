@@ -7,10 +7,12 @@ public class Entry
 
     public string date;
 
+    public int score;
+
     public string Arrange()
     {
 
-        string arranged = $"Date: {date} - Prompt: {prompt}\n{response}";
+        string arranged = $"Date: {date} - Score: {score}\nPrompt: {prompt}\n{response}";
 
         return arranged;
     }

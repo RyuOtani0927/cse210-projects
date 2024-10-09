@@ -24,9 +24,28 @@ public class Journal
 
         entry.prompt = prompts[promptIndex];
 
+        do
+        {
+            Console.Write("Rate how well you could do today with a score between 1-10: ");
+            entry.score = int.Parse(Console.ReadLine());
+
+            if (entry.score < 1 || entry.score > 10)
+            {
+                Console.WriteLine("Please type again.");
+                Console.WriteLine();
+            }
+
+        } while (entry.score < 1 || entry.score > 10);
+
+
+
+        
+        Console.WriteLine();
+
         Console.WriteLine(entry.prompt);
         Console.Write("> ");
         entry.response = Console.ReadLine();
+
 
         DateTime theCurrentTime = DateTime.Now;
         entry.date = theCurrentTime.ToShortDateString();
@@ -57,7 +76,7 @@ public class Journal
             foreach (Entry entry in entries)
             {
                 // You can add text to the file with the WriteLine method
-                outputFile.WriteLine($"{entry.prompt}|{entry.response}|{entry.date}");
+                outputFile.WriteLine($"{entry.prompt}|{entry.response}|{entry.date}|{entry.score}");
             }
 
         }
@@ -79,6 +98,7 @@ public class Journal
             entry.prompt = entryInfo[0];
             entry.response = entryInfo[1];
             entry.date = entryInfo[2];
+            entry.score = int.Parse(entryInfo[3]);
 
             entries.Add(entry);
         }
