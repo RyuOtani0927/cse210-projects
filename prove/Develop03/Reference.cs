@@ -8,6 +8,8 @@ public class Reference{
 
     private List<Verse> verseClassList = new();
 
+    private bool allHidden = false;
+
     public Reference(string book,int chapter,int singleverse, List<string> verseList) // Constructor
     {
         _book = book;
@@ -22,6 +24,8 @@ public class Reference{
             verseClass.SetVerseText(verseText);
 
             verseClassList.Add(verseClass);
+
+            verseClass.StoreEachWord();
         }
     }
 
@@ -39,6 +43,8 @@ public class Reference{
             verseClass.SetVerseText(verseText);
 
             verseClassList.Add(verseClass);
+
+            verseClass.StoreEachWord();
         }
     }
 
@@ -53,15 +59,77 @@ public class Reference{
             verseClass.SetVerseText(verseText);
 
             verseClassList.Add(verseClass);
+
+            verseClass.StoreEachWord();
         }
     }
 
+
     public void DisplayEachVerse()
     {
-        foreach (Verse verseClass in verseClassList)
-        {
-            Console.WriteLine(verseClass.GetVerseText());
+
+        int verseNum = _startverse;
+
+        if (_startverse == _endverse){
+            Console.WriteLine($"{_book} {_chapter}:{_startverse}");
         }
+        else {
+            Console.WriteLine($"{_book} {_chapter}:{_startverse}-{_endverse}");
+        }
+
+        foreach (Verse verseClass in verseClassList)
+        {   
+            Console.WriteLine($"Verse {verseNum}: {verseClass.GetVerseText()}");
+            verseNum = verseNum + 1;            
+        }
+
+    }
+
+    public void HideRandomWords()
+    {
+
+        allHidden = true;
+
+        foreach (Verse verseClass in verseClassList){
+            verseClass.HideRandomWord();
+            if (verseClass.GetIfHidden() == false){
+                allHidden = false;
+            }
+        }
+    }
+
+    public void Memorizor()
+    {
+        Console.WriteLine();
+
+        DisplayEachVerse();
+
+        Console.WriteLine();
+
+        Console.WriteLine("Press enter to continue or type 'quit' to finish:");
+
+        string response = Console.ReadLine();
+        
+        while (response != "quit" && allHidden == false){
+
+            if (response != "quit"){
+                HideRandomWords();
+                HideRandomWords();
+            }
+
+            Console.Clear();
+
+            DisplayEachVerse();
+
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to continue or type 'quit' to finish:");
+
+            response = Console.ReadLine();
+
+        }
+        
+        Console.WriteLine();
 
     }
 }
