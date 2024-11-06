@@ -22,33 +22,33 @@ public class Journal
 
         Console.WriteLine();
 
-        entry.prompt = prompts[promptIndex];
+        entry._entryPrompt = prompts[promptIndex];
 
         do
         {
             Console.Write("Rate how well you could do today with a score between 1-10: ");
-            entry.score = int.Parse(Console.ReadLine());
+            entry._score = int.Parse(Console.ReadLine());
 
-            if (entry.score < 1 || entry.score > 10)
+            if (entry._score < 1 || entry._score > 10)
             {
                 Console.WriteLine("Please type again.");
                 Console.WriteLine();
             }
 
-        } while (entry.score < 1 || entry.score > 10);
+        } while (entry._score < 1 || entry._score > 10);
 
 
 
         
         Console.WriteLine();
 
-        Console.WriteLine(entry.prompt);
+        Console.WriteLine(entry._entryPrompt);
         Console.Write("> ");
-        entry.response = Console.ReadLine();
+        entry._userResponse = Console.ReadLine();
 
 
         DateTime theCurrentTime = DateTime.Now;
-        entry.date = theCurrentTime.ToShortDateString();
+        entry._entryDate = theCurrentTime.ToShortDateString();
 
         entries.Add(entry);
 
@@ -76,7 +76,7 @@ public class Journal
             foreach (Entry entry in entries)
             {
                 // You can add text to the file with the WriteLine method
-                outputFile.WriteLine($"{entry.prompt}|{entry.response}|{entry.date}|{entry.score}");
+                outputFile.WriteLine($"{entry._entryPrompt}|{entry._userResponse}|{entry._entryDate}|{entry._score}");
             }
 
         }
@@ -89,16 +89,18 @@ public class Journal
         string fileName = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(fileName);
 
+        entries = [];
+
         foreach (string line in lines)
         {
             Entry entry = new();
 
             string[] entryInfo = line.Split("|");
 
-            entry.prompt = entryInfo[0];
-            entry.response = entryInfo[1];
-            entry.date = entryInfo[2];
-            entry.score = int.Parse(entryInfo[3]);
+            entry._entryPrompt = entryInfo[0];
+            entry._userResponse = entryInfo[1];
+            entry._entryDate = entryInfo[2];
+            entry._score = int.Parse(entryInfo[3]);
 
             entries.Add(entry);
         }

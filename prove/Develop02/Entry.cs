@@ -1,18 +1,18 @@
 
 public class Entry
 {
-    public string prompt;
+    public string _entryPrompt;
 
-    public string response;
+    public string _userResponse;
 
-    public string date;
+    public string _entryDate;
 
-    public int score;
+    public int _score;
 
     public string Arrange()
     {
 
-        string arranged = $"Date: {date} - Score: {score}\nPrompt: {prompt}\n{response}";
+        string arranged = $"Date: {_entryDate} - Score: {_score}\nPrompt: {_entryPrompt}\n{_userResponse}";
 
         return arranged;
     }
