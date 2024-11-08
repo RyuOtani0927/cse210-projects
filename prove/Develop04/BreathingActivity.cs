@@ -32,17 +32,19 @@ public class BreathingActivity : Activity
         DateTime currentTime = DateTime.Now;
         DateTime futureTime = currentTime.AddSeconds(_activityTime);
 
+        Console.WriteLine();
+
         while (currentTime < futureTime)
         {
             Random rnd = new Random();
-            int BreathInTime = rnd.Next(3,6);
-            int BreathOutTime = rnd.Next(3,6);
+            int BreatheInTime = rnd.Next(3,6);
+            int BreatheOutTime = rnd.Next(3,6);
 
-            Console.Write("Breath in...");
-            Countdown(BreathInTime);
+            Console.Write("Breathe in...");
+            Countdown(BreatheInTime);
 
-            Console.Write("Now breath out...");
-            Countdown(BreathOutTime);
+            Console.Write("Now breathe out...");
+            Countdown(BreatheOutTime);
             
             Console.WriteLine();
 

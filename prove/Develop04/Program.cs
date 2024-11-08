@@ -1,3 +1,11 @@
+// W08 Prove: Developer
+// Ryu Otani
+
+// Showing Creativity and Exceeding Requirements
+// - Same prompts/questions will not be selected until they have all been used at least once in that session.
+
+
+
 using System;
 
 class Program
@@ -5,7 +13,8 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello Develop04 World!");
-        
+    
+
         Program.Menu();
 
     }
@@ -15,6 +24,8 @@ class Program
         int choice = 0;
 
         while (choice != 4){
+
+            Console.Clear();
 
             Console.WriteLine();
 
@@ -26,30 +37,22 @@ class Program
             Console.Write("Select a choice from the menu: ");
             choice = int.Parse(Console.ReadLine());
 
-            do
+            
+            if (choice == 1)
             {
-                if (choice == 1)
-                {
-                    BreathingActivity activity = new BreathingActivity();
-                    activity.StartBreathing();
-                } 
-                else if (choice == 2)
-                {
-                    ReflectionActivity activity = new ReflectionActivity();
-                    activity.StartReflection();
-                }
-                else if (choice == 3)
-                {
-                    ListingActivity activity = new ListingActivity();
-                    activity.DisplayStart();
-                    activity.DisplayEnd();
-                }
-                else if (choice != 4)
-                {
-                    Console.Write("Select a choice from the menu: ");
-                    choice = int.Parse(Console.ReadLine());
-                }
-            } while ((choice < 1) || (choice > 4));
+                BreathingActivity activity = new BreathingActivity();
+                activity.StartBreathing();
+            } 
+            else if (choice == 2)
+            {
+                ReflectionActivity activity = new ReflectionActivity();
+                activity.StartReflection();
+            }
+            else if (choice == 3)
+            {
+                ListingActivity activity = new ListingActivity();
+                activity.StartListing();
+            }
 
 
         }

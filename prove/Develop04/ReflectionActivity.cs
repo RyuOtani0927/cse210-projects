@@ -38,12 +38,12 @@ public class ReflectionActivity : Activity
         reflectionQuestions.Add("Why was this experience meaningful to you?");
         reflectionQuestions.Add("Have you ever done anything like this before?");
         reflectionQuestions.Add("How did you get started?");
-        // reflectionQuestions.Add("How did you feel when it was complete?");
-        // reflectionQuestions.Add("What made this time different than other times when you were not as successful?");
-        // reflectionQuestions.Add("What is your favorite thing about this experience?");
-        // reflectionQuestions.Add("What could you learn from this experience that applies to other situations?");
-        // reflectionQuestions.Add("What did you learn about yourself through this experience?");
-        // reflectionQuestions.Add("How can you keep this experience in mind in the future?");
+        reflectionQuestions.Add("How did you feel when it was complete?");
+        reflectionQuestions.Add("What made this time different than other times when you were not as successful?");
+        reflectionQuestions.Add("What is your favorite thing about this experience?");
+        reflectionQuestions.Add("What could you learn from this experience that applies to other situations?");
+        reflectionQuestions.Add("What did you learn about yourself through this experience?");
+        reflectionQuestions.Add("How can you keep this experience in mind in the future?");
     }
 
     public void StartReflection()
@@ -60,7 +60,7 @@ public class ReflectionActivity : Activity
         do
         {
             randomIndex = rnd.Next(reflectionPrompts.Count);
-        } while (usedReflectionPrompts.Contains(randomIndex));
+        } while (usedReflectionPrompts.Contains(randomIndex) & (usedReflectionPrompts.Count != reflectionPrompts.Count));
         
         string reflectionPrompt = reflectionPrompts[randomIndex];
 
@@ -87,7 +87,7 @@ public class ReflectionActivity : Activity
             do
             {
                 randomIndex2 = rnd2.Next(reflectionQuestions.Count);
-            } while (usedReflectionQuestions.Contains(randomIndex2));
+            } while (usedReflectionQuestions.Contains(randomIndex2) & (usedReflectionQuestions.Count != reflectionQuestions.Count));
 
             string reflectionQuestion = reflectionQuestions[randomIndex2];
 

@@ -21,7 +21,7 @@ public class ListingActivity : Activity
 {
     
     private List<string> listingPrompts = new();
-
+    private List<int> usedListingPrompts = new();
 
     public ListingActivity()
     {
@@ -42,6 +42,45 @@ public class ListingActivity : Activity
         DateTime currentTime = DateTime.Now;
         DateTime futureTime = currentTime.AddSeconds(_activityTime);
 
+        Random rnd = new();
+        int randomIndex;
+
+        do
+        {
+            randomIndex = rnd.Next(listingPrompts.Count);
+        } while (usedListingPrompts.Contains(randomIndex) & (usedListingPrompts.Count != listingPrompts.Count));
+
+        usedListingPrompts.Add(randomIndex);
+        string listingPrompt = listingPrompts[randomIndex];
+
+        Console.WriteLine("List as many responses as you can to the following prompt: ");
+
+        Console.WriteLine($" --- {listingPrompt} --- ");
+
+        Console.WriteLine();
+
+        Console.Write("You may begin in: ");
+        Countdown(5);
+
+        Console.WriteLine();
+
+        int responseCounter = 0;
+
+        while (currentTime < futureTime)
+        {
+            Console.Write("> ");
+            Console.ReadLine();
+
+            responseCounter = responseCounter + 1;
+
+            currentTime = DateTime.Now;
+        }
+
+        Console.WriteLine($"You listed {responseCounter} items!");
+
+        Console.WriteLine();
+
+        DisplayEnd();
     }
 
 }
