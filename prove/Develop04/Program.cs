@@ -16,6 +16,8 @@ class Program
 
         while (choice != 4){
 
+            Console.WriteLine();
+
             Console.WriteLine("Menu Option:");
             Console.WriteLine("     1. Start breathing activity");
             Console.WriteLine("     2. Start reflecting activity");
@@ -29,8 +31,7 @@ class Program
                 if (choice == 1)
                 {
                     BreathingActivity activity = new BreathingActivity();
-                    activity.DisplayStart();
-                    activity.DisplayEnd();
+                    activity.StartBreathing();
                 } 
                 else if (choice == 2)
                 {
