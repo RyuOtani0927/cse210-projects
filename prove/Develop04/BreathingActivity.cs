@@ -26,11 +26,8 @@ public class BreathingActivity : Activity
 
     public void StartBreathing()
     {
-
-        Console.Clear();
         
         DisplayStart();
-        Console.WriteLine();
 
         DateTime currentTime = DateTime.Now;
         DateTime futureTime = currentTime.AddSeconds(_activityTime);
@@ -44,12 +41,9 @@ public class BreathingActivity : Activity
             Console.Write("Breath in...");
             Countdown(BreathInTime);
 
-            Console.WriteLine();
-
             Console.Write("Now breath out...");
             Countdown(BreathOutTime);
-
-            Console.WriteLine();
+            
             Console.WriteLine();
 
             currentTime = DateTime.Now;
@@ -59,21 +53,4 @@ public class BreathingActivity : Activity
 
     }
 
-
-    public void Countdown(int countTime)
-    {
-        int counter = countTime;
-
-        while (counter > 0)
-        {
-            Console.Write(counter);
-
-            Thread.Sleep(1000);
-
-            Console.Write("\b \b");
-
-            counter = counter - 1;
-        }
-
-    }
 }

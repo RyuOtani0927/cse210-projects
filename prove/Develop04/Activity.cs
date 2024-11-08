@@ -6,6 +6,7 @@ public class Activity
 
     public void DisplayStart()
     {
+        Console.Clear();
         Console.WriteLine();
         Console.WriteLine($"Welcome to the {_activityName} Activity.");
         Console.WriteLine();
@@ -26,7 +27,6 @@ public class Activity
     {
         Console.WriteLine("Well done!!");
         Spinner();
-        Console.WriteLine();
         Console.WriteLine($"You have completed another {_activityTime} seconds of the {_activityName} Activity.");
         Spinner();
         
@@ -61,8 +61,27 @@ public class Activity
 
             currentTime = DateTime.Now;
         }
+        Console.WriteLine();
     }
 
+    public void Countdown(int countTime)
+    {
+        int counter = countTime;
+
+        while (counter > 0)
+        {
+            Console.Write(counter);
+
+            Thread.Sleep(1000);
+
+            Console.Write("\b \b");
+
+            counter = counter - 1;
+        }
+
+        Console.WriteLine();
+
+    }
     
 
 }

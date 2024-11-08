@@ -36,8 +36,7 @@ class Program
                 else if (choice == 2)
                 {
                     ReflectionActivity activity = new ReflectionActivity();
-                    activity.DisplayStart();
-                    activity.DisplayEnd();
+                    activity.StartReflection();
                 }
                 else if (choice == 3)
                 {
