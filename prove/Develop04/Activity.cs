@@ -4,6 +4,38 @@ public class Activity
     protected string _activityDescription;
     protected int _activityTime;
 
+    public string GetActivityName()
+    {
+        return _activityName;
+    }
+
+    public void SetActivityName(string activityName)
+    {
+        _activityName = activityName;
+    }
+
+    public string GetActivityDescription()
+    {
+        return _activityDescription;
+    }
+
+    public void SetActivityDescription(string activityDescription)
+    {
+        _activityDescription = activityDescription;
+    }
+
+    public int GetActivityTime()
+    {
+        return _activityTime;
+    }
+
+    public void SetActivityTime(int activityTime)
+    {
+        _activityTime = activityTime;
+    }
+
+
+
     public void DisplayStart()
     {
         Console.Clear();
