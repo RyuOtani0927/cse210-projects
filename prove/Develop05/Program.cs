@@ -1,4 +1,5 @@
 using System;
+using System.IO; 
 
 class Program
 {
@@ -37,11 +38,11 @@ class Program
             }
             else if (choice == 3)
             {
-                SaveGoals();
+                SaveGoals(goalsList);
             }
             else if (choice == 4)
             {
-                LoadGoals();
+                LoadGoals(goalsList);
             }
             else if (choice == 5)
             {
@@ -100,13 +101,54 @@ class Program
             Console.WriteLine($"    {i+1}. {goalsList[i].GetGoalDetail()}");
         }
     }
-    static void SaveGoals()
+    static void SaveGoals(List<Goal> goalsList)
     {
-        Console.WriteLine("SaveGoals");
+        Console.Write("What is the filename for the goal file?: ");
+        string fileName = Console.ReadLine();
+
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            foreach (Goal goal in goalsList)
+            {
+                outputFile.WriteLine(goal.FormatGoalLined());
+            }
+        }
     }
-    static void LoadGoals()
+    static void LoadGoals(List<Goal> goalsList)
     {
-        Console.WriteLine("LoadGoals");
+        Console.Write("What is the filename for the goal file?: ");
+        string fileName = Console.ReadLine();
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+        
+        goalsList.Clear();
+
+        foreach (string line in lines)
+        {
+            string goalType = line.Split(":")[0];
+
+            string goalDetail = line.Split(":")[1];
+            string[] goalInfos = goalDetail.Split("|");
+
+            Goal loadedGoal = new();
+
+            if (goalType == "SimpleGoal")
+            {
+                loadedGoal = new SimpleGoal(goalInfos);
+            }
+            else if (goalType == "EternalGoal")
+            {
+                loadedGoal = new EternalGoal(goalInfos);
+            }
+            else if (goalType == "ChecklistGoal")
+            {
+                loadedGoal = new ChecklistGoal(goalInfos);
+            }
+
+            goalsList.Add(loadedGoal);
+
+        }
+        
+
     }
     static void RecordEvent()
     {

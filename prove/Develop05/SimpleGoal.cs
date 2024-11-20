@@ -7,6 +7,18 @@ public class SimpleGoal : Goal
         _ifCompleted = false;
     }
 
+    public SimpleGoal(string[] goalinfos) : base(goalinfos)
+    {
+        if (goalinfos[3] == "False")
+        {
+            _ifCompleted = false;
+        }
+        else
+        {
+            _ifCompleted = true;
+        }
+    }
+
     public SimpleGoal(string name, string description, int point) : base(name,description,point)
     {
         _ifCompleted = false;
@@ -35,4 +47,8 @@ public class SimpleGoal : Goal
         return $"[{checkComplete}] {base.GetGoalDetail()}";
     }
 
+    public override string FormatGoalLined()
+    {
+        return $"SimpleGoal:{base.FormatGoalLined()}|{_ifCompleted}";
+    }
 }

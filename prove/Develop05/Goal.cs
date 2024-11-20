@@ -1,3 +1,5 @@
+
+
 public class Goal
 {
     protected string _goalName;
@@ -11,6 +13,13 @@ public class Goal
         _goalName = "";
         _goalDescription = "";
         _goalPoint = 0;
+    }
+
+    public Goal(string[] goalInfos)
+    {
+        _goalName = goalInfos[0];
+        _goalDescription = goalInfos[1];
+        _goalPoint = int.Parse(goalInfos[2]);
     }
 
     public Goal(string name, string description, int point)
@@ -61,7 +70,10 @@ public class Goal
         return $"{_goalName} ({_goalDescription})";
     }
 
-    
+    public virtual string FormatGoalLined()
+    {
+        return $"{_goalName}|{_goalDescription}|{_goalPoint}";
+    }
 
 
 }

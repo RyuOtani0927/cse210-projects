@@ -11,6 +11,13 @@ public class ChecklistGoal : Goal
         _progress = 0;
     }
 
+    public ChecklistGoal(string[] goalInfos) : base(goalInfos)
+    {
+        _bonusPoint = int.Parse(goalInfos[3]);
+        _requiredProgress = int.Parse(goalInfos[4]);
+        _progress = int.Parse(goalInfos[5]);
+    }
+
     public ChecklistGoal(string name, string description, int point, int bonus, int required) : base(name, description, point)
     {
         _bonusPoint = bonus;
@@ -65,5 +72,10 @@ public class ChecklistGoal : Goal
         }
 
         return $"[{checkComplete}] {base.GetGoalDetail()} - Currently Completed: {_progress}/{_requiredProgress}";
+    }
+
+    public override string FormatGoalLined()
+    {
+        return $"ChecklistGoal:{base.FormatGoalLined()}|{_bonusPoint}|{_requiredProgress}|{_progress}";
     }
 }
