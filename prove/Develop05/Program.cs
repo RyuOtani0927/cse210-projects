@@ -1,3 +1,10 @@
+// Unit 05 Develop: Eternal Quest Program
+// Ryu Otani
+
+// Showing Creativity and Exceeding Requirements: 
+// I added a new type of goal called "Negative Goal", where the user lose points for bad habits or when they fail the goal.
+
+
 using System;
 using System.IO; 
 
@@ -74,14 +81,15 @@ class Program
             Console.WriteLine("     1. Simple Goal");
             Console.WriteLine("     2. Eternal Goal");
             Console.WriteLine("     3. Checklist Goal");
+            Console.WriteLine("     4. Negative Goal");
             Console.Write("Which type of goal would you like to create?: ");
             goalChoice = int.Parse(Console.ReadLine());  
 
-            if (goalChoice < 1 || goalChoice > 3)
+            if (goalChoice < 1 || goalChoice > 4)
             {
                 Console.WriteLine("Please Type Again.");
             }
-        } while (goalChoice < 1 || goalChoice > 3);
+        } while (goalChoice < 1 || goalChoice > 4);
         
         
 
@@ -98,6 +106,10 @@ class Program
         else if (goalChoice == 3)
         {
             newGoal = new ChecklistGoal();
+        }
+        else if (goalChoice == 4)
+        {
+            newGoal = new NegativeGoal();
         }
 
         newGoal.CreateNewGoal();
@@ -160,6 +172,10 @@ class Program
             {
                 loadedGoal = new ChecklistGoal(goalInfos);
             }
+            else if (goalType == "NegativeGoal")
+            {
+                loadedGoal = new NegativeGoal(goalInfos);
+            }
  
             goalsList.Add(loadedGoal);
         }
@@ -176,8 +192,19 @@ class Program
         Console.Write("Which goal did you accomplish?: ");
         int goalIndex = int.Parse(Console.ReadLine()) - 1;
         int earnedPoint = goalsList[goalIndex].RecordAccomplishment();
-        Console.WriteLine($"Congratulations! You have earned {earnedPoint} points!");
+        if (earnedPoint < 0)
+        {
+            Console.WriteLine($"You have lost {earnedPoint * -1} points...");
+        }
+        else
+        {
+            Console.WriteLine($"Congratulations! You have earned {earnedPoint} points!");
+        }
         totalPoints = totalPoints + earnedPoint;
+        if (totalPoints < 0)
+        {
+            totalPoints = 0;
+        }
         Console.WriteLine($"You now have {totalPoints} points.");
 
         return totalPoints;
