@@ -12,6 +12,7 @@ class Program
     static void Menu()
     {
         List<Goal> goalsList = new();
+        int totalPoints = 0;
 
         int choice = 0;
         while (choice != 6)
@@ -28,7 +29,11 @@ class Program
             Console.Write("Select a choice from the menu: ");
             choice = int.Parse(Console.ReadLine());
 
-            if (choice == 1)
+            if (choice == 6)
+            {
+                break;
+            }
+            else if (choice == 1)
             {
                 goalsList.Add(CreateGoal());
             }
@@ -38,20 +43,24 @@ class Program
             }
             else if (choice == 3)
             {
-                SaveGoals(goalsList);
+                SaveGoals(goalsList, totalPoints);
             }
             else if (choice == 4)
             {
-                LoadGoals(goalsList);
+                totalPoints = LoadGoals(goalsList,totalPoints);
             }
             else if (choice == 5)
             {
-                RecordEvent();
+                totalPoints = RecordEvent(goalsList, totalPoints);
             }
-            else if (choice != 6)
+            else
             {
                 Console.WriteLine("Please Type Again.");
+                continue;
             }
+
+            Console.WriteLine();
+            Console.WriteLine($"You have {totalPoints} points.");
         }
     }
 
@@ -96,37 +105,45 @@ class Program
     }
     static void ListGoals(List<Goal> goalsList)
     {
+        Console.WriteLine();
+        Console.WriteLine("The goals are:");
         for (int i = 0; i < goalsList.Count; i++)
         {
             Console.WriteLine($"    {i+1}. {goalsList[i].GetGoalDetail()}");
         }
     }
-    static void SaveGoals(List<Goal> goalsList)
+    static void SaveGoals(List<Goal> goalsList, int totalPoints)
     {
         Console.Write("What is the filename for the goal file?: ");
         string fileName = Console.ReadLine();
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
+            outputFile.WriteLine(totalPoints);
+
             foreach (Goal goal in goalsList)
             {
                 outputFile.WriteLine(goal.FormatGoalLined());
             }
         }
     }
-    static void LoadGoals(List<Goal> goalsList)
+    static int LoadGoals(List<Goal> goalsList, int totalPoints)
     {
         Console.Write("What is the filename for the goal file?: ");
         string fileName = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(fileName);
-        
+
+        totalPoints = int.Parse(lines[0]);
+
+        lines = lines.Skip(1).ToArray();
+
         goalsList.Clear();
 
         foreach (string line in lines)
         {
-            string goalType = line.Split(":")[0];
+            string goalType = line.Split("::")[0];
 
-            string goalDetail = line.Split(":")[1];
+            string goalDetail = line.Split("::")[1];
             string[] goalInfos = goalDetail.Split("|");
 
             Goal loadedGoal = new();
@@ -143,19 +160,27 @@ class Program
             {
                 loadedGoal = new ChecklistGoal(goalInfos);
             }
-
+ 
             goalsList.Add(loadedGoal);
-
         }
-        
+        return totalPoints;
 
     }
-    static void RecordEvent()
+    static int RecordEvent(List<Goal> goalsList, int totalPoints)
     {
-        Console.WriteLine("RecordEvent");
+        Console.WriteLine("The goals are:");
+        for (int i = 0; i < goalsList.Count; i++)
+        {
+            Console.WriteLine($"    {i+1}. {goalsList[i].GetGoalName()}");
+        }
+        Console.Write("Which goal did you accomplish?: ");
+        int goalIndex = int.Parse(Console.ReadLine()) - 1;
+        int earnedPoint = goalsList[goalIndex].RecordAccomplishment();
+        Console.WriteLine($"Congratulations! You have earned {earnedPoint} points!");
+        totalPoints = totalPoints + earnedPoint;
+        Console.WriteLine($"You now have {totalPoints} points.");
+
+        return totalPoints;
     }
-    static int GetTotalPoints()
-    {
-        return 0;
-    }
+
 }

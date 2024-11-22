@@ -16,6 +16,6 @@ public class EternalGoal : Goal
 
     public override string FormatGoalLined()
     {
-        return $"EternalGoal:{base.FormatGoalLined()}";
+        return $"EternalGoal::{base.FormatGoalLined()}";
     }
 }

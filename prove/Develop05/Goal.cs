@@ -75,5 +75,10 @@ public class Goal
         return $"{_goalName}|{_goalDescription}|{_goalPoint}";
     }
 
+    public virtual int RecordAccomplishment() 
+    {
+        return _goalPoint;
+    }
+
 
 }

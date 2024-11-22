@@ -1,6 +1,6 @@
 public class SimpleGoal : Goal
 {
-    protected bool _ifCompleted;
+    private bool _ifCompleted;
 
     public SimpleGoal() : base()
     {
@@ -49,6 +49,12 @@ public class SimpleGoal : Goal
 
     public override string FormatGoalLined()
     {
-        return $"SimpleGoal:{base.FormatGoalLined()}|{_ifCompleted}";
+        return $"SimpleGoal::{base.FormatGoalLined()}|{_ifCompleted}";
+    }
+
+    public override int RecordAccomplishment()
+    {
+        _ifCompleted = true;
+        return _goalPoint;
     }
 }

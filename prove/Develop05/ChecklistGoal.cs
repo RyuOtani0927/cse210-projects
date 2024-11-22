@@ -76,6 +76,20 @@ public class ChecklistGoal : Goal
 
     public override string FormatGoalLined()
     {
-        return $"ChecklistGoal:{base.FormatGoalLined()}|{_bonusPoint}|{_requiredProgress}|{_progress}";
+        return $"ChecklistGoal::{base.FormatGoalLined()}|{_bonusPoint}|{_requiredProgress}|{_progress}";
+    }
+
+    public override int RecordAccomplishment()
+    {
+        _progress = _progress + 1;
+
+        if (_progress == _requiredProgress)
+        {
+            return _goalPoint + _bonusPoint;
+        }
+        else
+        {
+            return _goalPoint;
+        }
     }
 }
