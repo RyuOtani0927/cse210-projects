@@ -1,44 +1,44 @@
 
-public class Verse{
+public class Scripture{
     private string _text;
-    private List<Word> wordClassList = new();
+    private List<Word> _wordClassList = new();
 
-    private List<int> hiddenWordIndexList = new();
+    private List<int> _hiddenWordIndexList = new();
 
     private bool _hidden = false;
 
     public void HideRandomWord(){
 
-        if (wordClassList.Count != hiddenWordIndexList.Count){
+        if (_wordClassList.Count != _hiddenWordIndexList.Count){
             
             Random random = new Random();
 
-            int randomIndex = random.Next(wordClassList.Count);
+            int randomIndex = random.Next(_wordClassList.Count);
 
         
-            while (hiddenWordIndexList.Contains(randomIndex)){
-                randomIndex = random.Next(wordClassList.Count);
+            while (_hiddenWordIndexList.Contains(randomIndex)){
+                randomIndex = random.Next(_wordClassList.Count);
             }
         
 
-            Word randomWordClass = wordClassList[randomIndex];
+            Word randomWordClass = _wordClassList[randomIndex];
             randomWordClass.Hide();
 
             UpdateText();
 
-            hiddenWordIndexList.Add(randomIndex);
+            _hiddenWordIndexList.Add(randomIndex);
         }
 
-        if ((wordClassList.Count == hiddenWordIndexList.Count)){
+        if ((_wordClassList.Count == _hiddenWordIndexList.Count)){
             _hidden = true;
         }
 
     }
 
     public void UpdateText(){
-        // Update the _text after hiding some word, as _text and wordClassList are separate.
+        // Update the _text after hiding some word, as _text and _wordClassList are separate.
         string text = "";
-        foreach (Word wordClass in wordClassList){
+        foreach (Word wordClass in _wordClassList){
             text = text + wordClass.GetWord() + " ";
         }
 
@@ -46,7 +46,7 @@ public class Verse{
     }
 
     public void StoreEachWord(){
-        // Store each word in the _text into a new wordClass and the wordClassList.
+        // Store each word in the _text into a new wordClass and the _wordClassList.
         string[] wordList = _text.Split(" ");
 
         foreach (var word in wordList)
@@ -55,7 +55,7 @@ public class Verse{
 
             wordClass.SetWord(word);
 
-            wordClassList.Add(wordClass);
+            _wordClassList.Add(wordClass);
         }
     }
 

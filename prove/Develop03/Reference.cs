@@ -6,9 +6,9 @@ public class Reference{
     private int _startverse;
     private int _endverse;
 
-    private List<Verse> verseClassList = new();
+    private List<Scripture> _scriptureClassList = new();
 
-    private bool allHidden = false;
+    private bool _allHidden;
 
     public Reference(string book,int chapter,int singleverse, List<string> verseList) // Constructor
     {
@@ -16,14 +16,15 @@ public class Reference{
         _chapter = chapter;
         _startverse = singleverse;
         _endverse = singleverse;
+        _allHidden = false;
 
         foreach (string verseText in verseList)
         {
-            Verse verseClass = new();
+            Scripture verseClass = new();
 
             verseClass.SetVerseText(verseText);
 
-            verseClassList.Add(verseClass);
+            _scriptureClassList.Add(verseClass);
 
             verseClass.StoreEachWord();
         }
@@ -35,14 +36,15 @@ public class Reference{
         _chapter = chapter;
         _startverse = start;
         _endverse = end;
+        _allHidden = false;
 
         foreach (string verseText in verseList)
         {
-            Verse verseClass = new();
+            Scripture verseClass = new();
 
             verseClass.SetVerseText(verseText);
 
-            verseClassList.Add(verseClass);
+            _scriptureClassList.Add(verseClass);
 
             verseClass.StoreEachWord();
         }
@@ -54,11 +56,11 @@ public class Reference{
     {
         foreach (string verseText in verseList)
         {
-            Verse verseClass = new();
+            Scripture verseClass = new();
 
             verseClass.SetVerseText(verseText);
 
-            verseClassList.Add(verseClass);
+            _scriptureClassList.Add(verseClass);
 
             verseClass.StoreEachWord();
         }
@@ -77,9 +79,9 @@ public class Reference{
             Console.WriteLine($"{_book} {_chapter}:{_startverse}-{_endverse}");
         }
 
-        foreach (Verse verseClass in verseClassList)
+        foreach (Scripture verseClass in _scriptureClassList)
         {   
-            Console.WriteLine($"Verse {verseNum}: {verseClass.GetVerseText()}");
+            Console.WriteLine($"Scripture {verseNum}: {verseClass.GetVerseText()}");
             verseNum = verseNum + 1;            
         }
 
@@ -88,12 +90,12 @@ public class Reference{
     public void HideRandomWords()
     {
 
-        allHidden = true;
+        _allHidden = true;
 
-        foreach (Verse verseClass in verseClassList){
+        foreach (Scripture verseClass in _scriptureClassList){
             verseClass.HideRandomWord();
             if (verseClass.GetIfHidden() == false){
-                allHidden = false;
+                _allHidden = false;
             }
         }
     }
@@ -110,7 +112,7 @@ public class Reference{
 
         string response = Console.ReadLine();
         
-        while (response != "quit" && allHidden == false){
+        while (response != "quit" && _allHidden == false){
 
             if (response != "quit"){
                 HideRandomWords();
