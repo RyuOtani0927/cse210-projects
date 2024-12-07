@@ -49,7 +49,7 @@ public class Scripture{
         // Store each word in the _text into a new wordClass and the _wordClassList.
         string[] wordList = _text.Split(" ");
 
-        foreach (var word in wordList)
+        foreach (string word in wordList)
         {
             Word wordClass = new();
 
