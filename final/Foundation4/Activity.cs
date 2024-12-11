@@ -49,6 +49,6 @@ public class Activity
     }
     public string GetSummary()
     {
-
+        return $"{_activityDate} {_activityType} ({_activityLength} min): Distance {String.Format("{0:0.0#}",GetDistance())} miles, Speed {String.Format("{0:0.0#}",GetSpeed())} mph, Pace: {String.Format("{0:0.0#}",GetPace())} min per mile";
     }
 }
